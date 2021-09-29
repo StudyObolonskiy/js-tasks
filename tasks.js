@@ -26,3 +26,22 @@ function bracketsValidator(sample) {
   })
   return stack.length ? false : true
 }
+
+// Lodash get
+
+function get(obj, path, defaultValue = undefined) {
+  const pathArray = Array.isArray(path)
+    ? path
+    : path.split('.').reduce((acc, curr) => acc = [...acc, ...curr.replace(']', '').split('[')], [])
+  let result = obj;
+
+  pathArray.forEach(item => {
+    if (!result) return
+    if (Array.isArray(result)) {
+      result = result[+item]
+    } else {
+      result = result[item]
+    }
+  })
+  return result ? result : defaultValue
+}
