@@ -13,10 +13,10 @@ function bracketsValidator(sample) {
     patterns.forEach(pattern => {
       const [open, close] = pattern
       if (char === open) {
-        stack.push(close)
+        stack.push(open)
       }
       if (char === close) {
-        if (char === stack[stack.length - 1]) {
+        if (open === stack[stack.length - 1]) {
           stack.pop()
         } else {
           stack.push(char)
@@ -110,3 +110,17 @@ function createStore(reducer, initialState) {
 //       return state
 //   }
 // }
+
+// range date
+
+function getRanges(range, date) {
+  const dataDate = new Date(date)
+  const newRanges = range.map(item => {
+    const [first, second] =  item.split('-')
+    if(new Date(first) <= dataDate && dataDate <= new Date(second)) {
+      return `${first}-${dataDate.toISOString().slice(0, 10).replace(/-/g, '/')}, ${date}-${second}`.split(',')
+    } else return item
+  }).flat()
+  if (newRanges.length < 3) throw new Error('This date is not in the range')
+  return newRanges
+}
