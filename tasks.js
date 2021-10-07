@@ -119,7 +119,8 @@ function getRanges(range, date) {
     const [first, second] =  item.split('-')
     if(new Date(first) <= dataDate && dataDate <= new Date(second)) {
       return `${first}-${dataDate.toISOString().slice(0, 10).replace(/-/g, '/')}, ${date}-${second}`.split(',')
-    } else return item
+    }
+    return item
   }).flat()
   if (newRanges.length === range.length) throw new Error('This date is not in the range')
   return newRanges
