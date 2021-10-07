@@ -121,6 +121,6 @@ function getRanges(range, date) {
       return `${first}-${dataDate.toISOString().slice(0, 10).replace(/-/g, '/')}, ${date}-${second}`.split(',')
     } else return item
   }).flat()
-  if (newRanges.length < 3) throw new Error('This date is not in the range')
+  if (newRanges.length === range.length) throw new Error('This date is not in the range')
   return newRanges
 }
