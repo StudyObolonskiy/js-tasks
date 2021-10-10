@@ -125,3 +125,24 @@ function getRanges(range, date) {
   if (newRanges.length === range.length) throw new Error('This date is not in the range')
   return newRanges
 }
+
+// debounce
+
+function debounce(f, ms) {
+  let timeout = false
+  return function() {
+    if (timeout) return
+    f.apply(this, arguments)
+    timeout = true
+    setTimeout(() => timeout = false, ms)
+  }
+}
+
+// test
+// const f = debounce(console.log, 1000);
+
+// f(1);
+// f(2);
+// setTimeout( () => f(3), 100);
+// setTimeout( () => f(4), 1100);
+// setTimeout( () => f(5), 1500);
