@@ -146,3 +146,16 @@ function debounce(f, ms) {
 // setTimeout( () => f(3), 100);
 // setTimeout( () => f(4), 1100);
 // setTimeout( () => f(5), 1500);
+const arr = [{age:20,name:"Peter"}, {age:30,name:"Mike"}, {age:20,name:"Bahdan"}];
+const groupBy = (arr, prop) => arr.reduce((acc, curr) => {
+  const key = curr[prop]
+  acc[key] = acc[key] ? [...acc[key], curr] : [curr]
+  return acc
+}, {})
+// не читаемый монстр
+// const groupBy = (arr, prop) => arr.reduce((acc, curr) => ({...acc, [curr[prop]]: (acc[curr[prop]] ? [...acc[curr[prop]], curr] : [curr])}), {})
+// groupBy(arr, 'age')
+// {
+//   20: [{age: 20, name: 'Peter'}, {age: 20, name: 'Bahdan'}],
+//   30: [{age:30,name:"Mike"}]
+// }
